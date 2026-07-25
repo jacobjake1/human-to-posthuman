@@ -7,7 +7,7 @@ reshape the conditions of human existence.
 
 Built July 2026, during the Compression Era. 
 
-- 48K+ AI layoffs tracked at [AI-Displacement-Tracker](your-link)
+- 48K+ AI layoffs tracked at [AI-Displacement-Tracker](https://github.com/jacobjake1/AI-Displacement-Tracker)
 - True unemployment: 53.6% (LISEP)
 - Expert AGI consensus collapsed from 2068 (2019) to 2033 (2026)
 - Open-source frontier models now run on consumer hardware
