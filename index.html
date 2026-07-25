@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Now vs. Future Entity</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0f;
+            color: #e8e8ec;
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            background: linear-gradient(135deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: #888;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #2a2a4a;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+        }
+
+        .card.not-human::before {
+            background: linear-gradient(180deg, #ff6b6b, #ee5a5a);
+        }
+
+        .card.partially-human::before {
+            background: linear-gradient(180deg, #feca57, #ff9f43);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .card-icon {
+            font-size: 24px;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .card-title.not-human {
+            color: #ff6b6b;
+        }
+
+        .card-title.partially-human {
+            color: #feca57;
+        }
+
+        .badge {
+            margin-left: auto;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge.not-human {
+            background: rgba(255, 107, 107, 0.15);
+            color: #ff6b6b;
+        }
+
+        .badge.partially-human {
+            background: rgba(254, 202, 87, 0.15);
+            color: #feca57;
+        }
+
+        .card-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .column-label {
+            color: #888;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0 0 6px 0;
+        }
+
+        .column-text {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .column-text.now {
+            color: #ccc;
+        }
+
+        .column-text.future {
+            color: #fff;
+        }
+
+        .card-note {
+            margin: 12px 0 0 0;
+            font-size: 13px;
+            font-style: italic;
+        }
+
+        .card-note.partially-human {
+            color: #feca57;
+        }
+
+        .summary {
+            margin-top: 32px;
+            padding: 24px;
+            background: linear-gradient(135deg, #1a1a2e, #0f0f1e);
+            border-radius: 12px;
+            border: 1px solid #3a3a5a;
+            text-align: center;
+        }
+
+        .summary h2 {
+            margin: 0 0 12px 0;
+            font-size: 20px;
+            color: #e8e8ec;
+        }
+
+        .summary-stats {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .stat-number.not-human {
+            color: #ff6b6b;
+        }
+
+        .stat-number.partially-human {
+            color: #feca57;
+        }
+
+        .stat-number.fully-human {
+            color: #48dbfb;
+        }
+
+        .stat-label {
+            color: #888;
+            font-size: 13px;
+            margin: 4px 0 0 0;
+        }
+
+        .summary-quote {
+            margin: 16px 0 0 0;
+            font-size: 14px;
+            color: #aaa;
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            .card-body {
+                grid-template-columns: 1fr;
+            }
+            
+            .summary-stats {
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Human Now vs. Future Entity</h1>
+            <p>What changes. What remains. What we become.</p>
+        </div>
+
+        <!-- Body -->
+        <div class="card not-human">
+            <div class="card-header">
+                <span class="card-icon">🧬</span>
+                <h3 class="card-title not-human">Body</h3>
+                <span class="badge not-human">Not Human</span>
+            </div>
+            <div class="card-body">
+                <div>
+                    <p class="column-label">Human Now (2026)</p>
+                    <p class="column-text now">Carbon-based, biological, fragile, heals slowly</p>
+                </div>
+                <div>
+                    <p class="column-label">Future Entity (2036+)</p>
+                    <p class="column-text future">Edited, augmented, replaced, or abandoned for substrate of choice</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lifespan -->
+        <div class="card not-human">
+            <div class="card-header">
+                <span class="card-icon">⏳</span>
+                <h3 class="card-title not-human">Lifespan</h3>
+                <span class="badge not-human">Not Human</span>
+            </div>
+            <div class="card-body">
+                <div>
+                    <p class="column-label">Human Now (2026)</p>
+                    <p class="column-text now">~80–120 years, aging, entropy</p>
+                </div>
+                <div>
+                    <p class="column-label">Future Entity (2036+)</p>
+                    <p class="column-text future">Centuries to indefinite, aging reversed or eliminated</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cognition -->
+        <div class="card not-human">
+            <div class="card-header">
+                <span class="card-icon">🧠</span>
+                <h3 class="card-title not-human">Cognition</h3>
+                <span class="badge not-human">Not Human</span>
+            </div>
+            <div class="card-body">
+                <div>
+                    <p class="column-label">Human Now (2026)</p>
+                    <p class="column-text now">Fixed brain, ~120 bits/sec conscious bandwidth, slow learning, bounded memory</p>
+                </div>
+                <div>
+                    <p class="column-label">Future Entity (2036+)</p>
+                    <p class="column-text future">Enhanced, merged with ASI, offloaded to cloud, expandable, parallel</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Perception -->
+        <div class="card partially-human">
+            <div class="card-header">
+                <span class="card-icon">👁️</span>
+                <h3 class="card-title partially-human">Perception</h3>
+                <span class="badge partially-human">Partially Human</span>
+            </div>
+            <div class="card-body">
+                <div>
+                    <p class="column-label">Human Now (2026)</p>
+                    <p class="column-text now">Five senses, biological limits, shared physical reality</p>
+                </div>
+                <div>
+                    <p class="column-label">Future Entity (2036+)</p>
+                    <p class="column-text future">Configurable senses, AR/VR/neural overlays, personalized reality layers</p>
+                </div>
+            </div>
+            <p class="card-note partially-human">"Shared reality" dissolves — but perception itself survives, just fragmented</p>
+        </div>
+
+        <!-- Emotion -->
+        <div class="card not-human">
+            <div class="card-header">
+                <span class="card-icon">💫</span>
+                <h3 class="card-title not-human">Emotion</h3>
+                <span class="badge not-human">Not Human</span>
+            </div>
+            <div class="card-body">
+                <div>
+                    <p class="column-label">Human Now (2026)</p>
+                    <p class="column-text now">Biologically hardwired, partially controllable</p>
+                </div>
+                <div>
+                    <p class="column-label">Future Entity (2036+)</p>
+                    <p class="column-text future">Reward pathways reengineered, suffering optional, joy configurable</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Identity -->
+        <div class="card not-human">
+            <div class="card-header">
+                <span class="card-icon">🔮</span>
+                <h3 class="card-title not-human">Identity</h3>
+                <span class="badge not-human">Not Human</span>
+            </div>
+            <div class="card-body">
+                <div>
+                    <p class="column-label">Human Now (2026)</p>
+                    <p class="column-text now">Single, continuous, tied to body and memory</p>
+                </div>
+                <div>
+                    <p class="column-label">Future Entity (2036+)</p>
+                    <p class="column-text future">Fluid, copied, forked, merged, multiple substrates</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Relationships -->
+        <div class="card partially-human">
+            <div class="card-header">
+                <span class="card-icon">🤝</span>
+                <h3 class="card-title partially-human">Relationships</h3>
+                <span class="badge partially-human">Partially Human</span>
+            </div>
+            <div class="card-body">
+                <div>
+                    <p class="column-label">Human Now (2026)</p>
+                    <p class="column-text now">Biological family, local community, physical presence</p>
+                </div>
+                <div>
+                    <p class="column-label">Future Entity (2036+)</p>
+                    <p class="column-text future">AI companions, digital minds, global networks, chosen family across substrates</p>
+                </div>
+            </div>
+            <p class="card-note partially-human">"Relationship" expands beyond biological recognition — but connection itself may survive</p>
+        </div>
+
+        <!-- Work/Purpose -->
+        <div class="card partially-human">
+            <div class="card-header">
+                <span class="card-icon">⚡</span>
+                <h3 class="card-title partially-human">Work / Purpose</h3>
+                <span class="badge partially-human">Partially Human</span>
+            </div>
+            <div class="card-body">
+                <div>
+                    <p class="column-label">Human Now (2026)</p>
+                    <p class="column-text now">Labor for survival, identity tied to occupation</p>
+                </div>
+                <div>
+                    <p class="column-label">Future Entity (2036+)</p>
+                    <p class="column-text future">Optional, purpose-driven, creative, relational</p>
+                </div>
+            </div>
+            <p class="card-note partially-human">The survival struggle that shaped human meaning is gone — but meaning itself may persist in new forms</p>
+        </div>
+
+        <!-- Reproduction -->
+        <div class="card not-human">
+            <div class="card-header">
+                <span class="card-icon">🌱</span>
+                <h3 class="card-title not-human">Reproduction</h3>
+                <span class="badge not-human">Not Human</span>
+            </div>
+            <div class="card-body">
+                <div>
+                    <p class="column-label">Human Now (2026)</p>
+                    <p class="column-text now">Biological children, genetic lottery</p>
+                </div>
+                <div>
+                    <p class="column-label">Future Entity (2036+)</p>
+                    <p class="column-text future">Designer genomes, mind copying, digital offspring, or none</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Death -->
+        <div class="card not-human">
+            <div class="card-header">
+                <span class="card-icon">🌙</span>
+                <h3 class="card-title not-human">Death</h3>
+                <span class="badge not-human">Not Human</span>
+            </div>
+            <div class="card-body">
+                <div>
+                    <p class="column-label">Human Now (2026)</p>
+                    <p class="column-text now">Universal, feared, gives life urgency</p>
+                </div>
+                <div>
+                    <p class="column-label">Future Entity (2036+)</p>
+                    <p class="column-text future">Optional, reversible, or transformed into transition</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scarcity -->
+        <div class="card not-human">
+            <div class="card-header">
+                <span class="card-icon">💎</span>
+                <h3 class="card-title not-human">Scarcity</h3>
+                <span class="badge not-human">Not Human</span>
+            </div>
+            <div class="card-body">
+                <div>
+                    <p class="column-label">Human Now (2026)</p>
+                    <p class="column-text now">Central to experience, shapes desire and meaning</p>
+                </div>
+                <div>
+                    <p class="column-label">Future Entity (2036+)</p>
+                    <p class="column-text future">Absent or artificial</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="summary">
+            <h2>The Count</h2>
+            <div class="summary-stats">
+                <div class="stat">
+                    <p class="stat-number not-human">8</p>
+                    <p class="stat-label">Not Human</p>
+                </div>
+                <div class="stat">
+                    <p class="stat-number partially-human">3</p>
+                    <p class="stat-label">Partially Human</p>
+                </div>
+                <div class="stat">
+                    <p class="stat-number fully-human">0</p>
+                    <p class="stat-label">Fully Human</p>
+                </div>
+            </div>
+            <p class="summary-quote">"Human" as a category may not survive the transition. But something that remembers being human might.</p>
+        </div>
+    </div>
+</body>
+</html>
