@@ -3,6 +3,8 @@
 A visual comparison of what changes when ASI, robotics, and abundance 
 reshape the conditions of human existence.
 
+Live Site -------> https://jacobjake1.github.io/human-to-posthuman/
+
 ## Context
 
 Built July 2026, during the Compression Era. 
